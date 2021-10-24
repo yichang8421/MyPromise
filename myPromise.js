@@ -1,5 +1,7 @@
 const p1 = new Promise((resolve, reject) => {
-    resolve(1);
+    setTimeout(() => {
+        resolve(1);
+    }, 1000)
 })
 
 const p2 = Promise.resolve(2)
@@ -7,10 +9,10 @@ const p2 = Promise.resolve(2)
 const p3 = Promise.reject(3)
 
 Promise
-    // .all([p1, p2, p3])
-    .all([p1,p2])
-    .then((values) => {
-        console.log(`all sucess: ${values}`);
+    .race([p1,p2,p3])
+    // .race([p3, p2, p1])
+    .then((value) => {
+        console.log(`all sucess: ${value}`);
     })
     .catch((reason) => {
         console.log(`fail: ${reason}`);

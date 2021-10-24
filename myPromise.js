@@ -1,13 +1,16 @@
 new Promise((resolve,reject)=>{
-    // resolve(1)
-    reject(1)
+    resolve(1)
+    // reject(1)
 })
     .then(value => {
         console.log("onResolved1",value);
-        return "ok"
+        // return 2
+        // return Promise.resolve(2)
+        // return Promise.reject(2)
+        throw 2
     },reason => {
         console.log("onRejected1",reason);
-        return "fail"
+        return "ok"
     })
     .then(value => {
         console.log("onResolved2",value);

@@ -1,20 +1,27 @@
+// 使用 promise 串联多个任务：
+// 同步任务可以直接返回值
+// 异步任务必须返回 promise 对象，获得状态之后才能使用 then 指定回调函数，最后异步执行回调
+
 new Promise((resolve, reject) => {
-    // resolve(1)
-    reject(1)
+    setTimeout(() => {
+        console.log("执行任务1（异步）");
+        resolve(1)
+    }, 1000)
 })
     .then(value => {
-        console.log("onResolved1", value);
+        console.log("执行成功：", value);
+        console.log("执行任务2（同步）")
+        return 2
+    })
+    .then(value => {
+        console.log("执行成功：", value)
         return new Promise((resolve, reject) => {
-            resolve(2)
-        })
-    }, reason => {
-        console.log("onRejected1", reason);
-        return new Promise((resolve, reject) => {
-            resolve(2)
+            setTimeout(() => {
+                console.log("执行任务3（异步）");
+                resolve(3)
+            }, 1000)
         })
     })
     .then(value => {
-        console.log("onResolved2", value);
-    }, reason => {
-        console.log("onRejected2", reason);
+        console.log("执行成功：", value)
     })

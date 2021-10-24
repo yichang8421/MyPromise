@@ -4,6 +4,10 @@ new Promise((resolve, reject) => {
     .then(() => {
     })
     .then(() => {
+    }, reason => {
+        return new Promise((resolve, reject) => {
+            reject(reason)
+        })
     })
     .then(() => {
     }, reason => {

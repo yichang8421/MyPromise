@@ -4,8 +4,10 @@ new Promise((resolve,reject)=>{
 })
     .then(value => {
         console.log("onResolved1",value);
+        return "ok"
     },reason => {
         console.log("onRejected1",reason);
+        return "fail"
     })
     .then(value => {
         console.log("onResolved2",value);

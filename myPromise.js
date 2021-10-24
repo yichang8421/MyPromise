@@ -10,7 +10,7 @@ const p = new Promise((resolve, reject) => {
     // },0)
 })
 
-console.log("其他任务");
+console.log("执行其他任务");
 
 p.then((value) => {
     console.log(value)

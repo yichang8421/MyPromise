@@ -1,19 +1,20 @@
-new Promise((resolve,reject)=>{
-    resolve(1)
-    // reject(1)
+new Promise((resolve, reject) => {
+    // resolve(1)
+    reject(1)
 })
     .then(value => {
-        console.log("onResolved1",value);
-        // return 2
-        // return Promise.resolve(2)
-        // return Promise.reject(2)
-        throw 2
-    },reason => {
-        console.log("onRejected1",reason);
-        return "ok"
+        console.log("onResolved1", value);
+        return new Promise((resolve, reject) => {
+            resolve(2)
+        })
+    }, reason => {
+        console.log("onRejected1", reason);
+        return new Promise((resolve, reject) => {
+            resolve(2)
+        })
     })
     .then(value => {
-        console.log("onResolved2",value);
-    },reason => {
-        console.log("onRejected2",reason);
+        console.log("onResolved2", value);
+    }, reason => {
+        console.log("onRejected2", reason);
     })

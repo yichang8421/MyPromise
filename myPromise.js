@@ -1,5 +1,6 @@
 new Promise((resolve,reject)=>{
-    resolve(1)
+    // resolve(1)
+    reject(1)
 })
     .then(value => {
         console.log("onResolved1",value);

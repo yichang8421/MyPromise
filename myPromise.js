@@ -6,8 +6,12 @@ new Promise((resolve, reject) => {
     .then(() => {
     })
     .then(() => {
+    }, reason => {
+        throw reason
     })
     .then(() => {
+    }, reason => {
+        return Promise.reject(reason)
     })
     .catch(reason => {
         console.log("onRejected", reason);

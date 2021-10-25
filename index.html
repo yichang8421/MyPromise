@@ -16,6 +16,7 @@
             // 直接调用 this 将指向 window
             // 必须将 this 调整为当前的 promise 对象
             resolve(1)
+            console.log("异步队列执行后面");
         })
     });
     // console.log(p);

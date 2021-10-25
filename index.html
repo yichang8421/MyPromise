@@ -10,9 +10,20 @@
 <body>
 <script src="lib/myPromise.js"></script>
 <script>
-    const p = new MyPromise((resolve,reject)=>{
-
+    const p = new MyPromise((resolve, reject) => {
+        //  使用计时器保证先指定回调函数，再执行 resolve() 获得状态
+        setTimeout(() => {
+            // 直接调用 this 将指向 window
+            // 必须将 this 调整为当前的 promise 对象
+            resolve.call(p, 1)
+        })
     });
+    // console.log(p);
+    p.then((value) => {
+        console.log("resolved", value);
+    }, (reason) => {
+        console.log("rejected", reason);
+    })
 </script>
 </body>
 </html>

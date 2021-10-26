@@ -20,6 +20,7 @@
     })
 
     const p1 = MyPromise.resolve(1)
+    const p4 = MyPromise.reject(4)
     const p2 = MyPromise.resolve(MyPromise.resolve(2))
     const p3 = MyPromise.resolve(MyPromise.reject(3))
     // p1.then(
@@ -40,17 +41,18 @@
 
 
     // const pAll = MyPromise.all([p1,p2,p3])
-    const pAll = MyPromise.all([p1,p2])
-    // const pRace = Promise.race([p3,p2,p1])
+    // const pAll = MyPromise.all([p1,p2])
+    const pRace = MyPromise.race([p3, p2, p1, p4])
+    // const pRace = MyPromise.race([p3, p2, p4, p1])
 
-    pAll.then(
-        values => console.log("onResolvedAll", values),
-        reason => console.log("onRejectedAll", reason)
-    )
-    // pRace.then(
-    //     value => console.log("onResolvedRace", value),
-    //     reason => console.log("onRejectedRace", reason)
+    // pAll.then(
+    //     values => console.log("onResolvedAll", values),
+    //     reason => console.log("onRejectedAll", reason)
     // )
+    pRace.then(
+        value => console.log("onResolvedRace", value),
+        reason => console.log("onRejectedRace", reason)
+    )
 </script>
 </body>
 </html>

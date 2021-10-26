@@ -11,25 +11,21 @@
 <script src="lib/myPromise.js"></script>
 <script>
     const p = new MyPromise((resolve, reject) => {
-        //  使用计时器保证先指定回调函数，再执行 resolve() 获得状态
         setTimeout(() => {
-            // 直接调用 this 将指向 window
-            // 必须将 this 调整为当前的 promise 对象
             resolve(1)
-            console.log("异步队列执行后面");
+            // reject(1)
+            console.log("promise()执行之后");
         })
-    });
-    // console.log(p);
-    p.then((value) => {
-        console.log("resolved1", value);
-    }, (reason) => {
-        console.log("rejected1", reason);
     })
-    p.then((value) => {
-        console.log("resolved2", value);
-    }, (reason) => {
-        console.log("rejected2", reason);
-    })
+
+    p.then(
+        value => console.log("onResolved1", value),
+        reason => console.log("onRejected1", reason)
+    )
+    p.then(
+        value => console.log("onResolved2", value),
+        reason => console.log("onRejected2", reason)
+    )
 
 </script>
 </body>

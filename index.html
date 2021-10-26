@@ -21,10 +21,16 @@
     });
     // console.log(p);
     p.then((value) => {
-        console.log("resolved", value);
+        console.log("resolved1", value);
     }, (reason) => {
-        console.log("rejected", reason);
+        console.log("rejected1", reason);
     })
+    p.then((value) => {
+        console.log("resolved2", value);
+    }, (reason) => {
+        console.log("rejected2", reason);
+    })
+
 </script>
 </body>
 </html>

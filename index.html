@@ -10,49 +10,24 @@
 <body>
 <script src="lib/myPromise.js"></script>
 <script>
-    const p = new MyPromise((resolve, reject) => {
-        // setTimeout(() => {
-        // resolve(1)
-        console.log("a");
-        reject(1)
-        console.log("b");
-        // })
-    })
-
     const p1 = MyPromise.resolve(1)
-    const p4 = MyPromise.reject(4)
     const p2 = MyPromise.resolve(MyPromise.resolve(2))
     const p3 = MyPromise.resolve(MyPromise.reject(3))
-    // p1.then(
-    //     value => console.log("onResolved1", value),
+    // const p4 = MyPromise.reject(4)
+
+    // const p = MyPromise.all([p1, p2,p3,p4])
+    // const p = MyPromise.all([p1, p2, 999])
+    const p = MyPromise.race([p2, p1, p3,1234])
+
+    // p.then(
+    //     values => console.log("onResolved1", values),
     //     reason => console.log("onRejected1", reason)
-    // ).then(
-    //     value => console.log("onResolved1", value),
-    //     reason => console.log("onRejected1", reason)
     // )
-    // p2.then(
-    //     value => console.log("onResolved2", value),
-    //     reason => console.log("onRejected2", reason)
-    // )
-    // p3.then(
-    //     value => console.log("onResolved3", value),
-    //     reason => console.log("onRejected3", reason)
-    // )
-
-
-    // const pAll = MyPromise.all([p1,p2,p3])
-    const pAll = MyPromise.all([p1,p2])
-    // const pRace = MyPromise.race([p3, p2, p1, p4])
-    // const pRace = MyPromise.race([p3, p2, p4, p1])
-
-    pAll.then(
-        values => console.log("onResolvedAll", values),
-        reason => console.log("onRejectedAll", reason)
+    p.then(
+        value => console.log("onResolved2", value),
+        reason => console.log("onRejected2", reason)
     )
-    // pRace.then(
-    //     value => console.log("onResolvedRace", value),
-    //     reason => console.log("onRejectedRace", reason)
-    // )
+
 </script>
 </body>
 </html>

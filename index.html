@@ -17,7 +17,7 @@
 
     // const p = MyPromise.all([p1, p2,p3,p4])
     // const p = MyPromise.all([p1, p2, 999])
-    const p = MyPromise.race([p2, p1, p3,1234])
+    const p = MyPromise.race([p2, p1, p3, 1234])
 
     // p.then(
     //     values => console.log("onResolved1", values),
@@ -28,6 +28,11 @@
         reason => console.log("onRejected2", reason)
     )
 
+    const pDelay1 = MyPromise.resolveDelay(200, 2000)
+    const pDelay2 = MyPromise.rejectDelay(400, 1000)
+
+    pDelay1.then(value => console.log("onResolvedDelay", value))
+    pDelay2.catch(reason => console.log("onRejectedDelay", reason))
 </script>
 </body>
 </html>

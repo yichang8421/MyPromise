@@ -16,14 +16,14 @@
     // const p4 = MyPromise.reject(4)
 
     // const p = MyPromise.all([p1, p2,p3,p4])
-    // const p = MyPromise.all([p1, p2, 999])
-    const p = MyPromise.race([p2, p1, p3, 1234])
+    const pAll = MyPromise.all([p1, p2, 999])
+    const pRace = MyPromise.race([p2, p1, p3, 1234])
 
-    // p.then(
-    //     values => console.log("onResolved1", values),
-    //     reason => console.log("onRejected1", reason)
-    // )
-    p.then(
+    pAll.then(
+        values => console.log("onResolved1", values),
+        reason => console.log("onRejected1", reason)
+    )
+    pRace.then(
         value => console.log("onResolved2", value),
         reason => console.log("onRejected2", reason)
     )

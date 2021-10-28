@@ -10,27 +10,26 @@
 <body>
 <script src="lib/myPromise.js"></script>
 <script>
-    // 所有同步代码全部执行完才会执行异步代码（宏任务和微任务）
-    // 宏任务包括：计时器、DOM操作、Ajax 等
-    // 微任务包括；promise 等
-    // 同级时，先执行微任务后执行宏任务
-    // 每次取出宏任务之前，都要保证先将其所有的微任务取出执行
     setTimeout(() => {
-        console.log("callback1")
-        Promise.resolve(3).then(
-            value => console.log("onResolved", value)
-        )
+        console.log(1);
     })
-    setTimeout(() => {
-        console.log("callback2")
-    })
-    Promise.resolve(1).then(
-        value => console.log("onResolved", value)
+
+    new Promise(resolve => {
+        console.log(2);
+        resolve()
+    }).then(
+        // 由于一开始状态就发生改变（为成功），同时回调函数已知，因此此时就放入微队列执行
+        () => console.log(3)
+    ).then(
+        // 一开始状态未知，此时只是将函数存入callback数组，还没有放入微队列
+        // 当打印 3 之后，状态才发生改变（为成功），此时才将“打印4”代码放入微队列执行
+        () => console.log(4)
     )
-    Promise.resolve(2).then(
-        value => console.log("onResolved", value)
-    )
+
     console.log(5);
+    // 先执行同步回调：打印 2、5
+    // 再执行微任务回调：打印 3、4
+    // 最后执行宏任务回调：打印 1
 </script>
 </body>
 </html>

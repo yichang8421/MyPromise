@@ -33,6 +33,43 @@
 
     pDelay1.then(value => console.log("onResolvedDelay", value))
     pDelay2.catch(reason => console.log("onRejectedDelay", reason))
+
+    // async\await 的用法
+    function f1() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // resolve(6)
+                reject(6)
+            })
+        })
+    }
+
+    // async 关键字使函数返回promise对象，该函数返回值有promise执行器执行结果决定
+    // async 函数内部可以没有 await 关键字
+    async function f3() {
+        return "非promise"
+    }
+
+    // await 关键字必须在一个 async 函数内部
+    // await 关键字后面可以接promise对象，也可以接非promise对象
+    // 当其后接promise对象时，返回值就为promise执行器的执行结果，但它只能正常返回promise成功的结果；
+    // 如果promise执行结果为失败，则会抛异常，此时必须使用 try-catch 捕获。因此一般async\await关键字要与 try-catch 配合使用。
+    // 当其后接非promise对象时，返回值就为改表达式的结果
+    async function f2() {
+        try {
+            // const value = await f1()
+            // console.log(value);
+
+            const value2 = f3()
+            const value3 = await f3()
+            console.log(value2)
+            console.log(value3)
+        } catch (e) {
+            console.log("错误：" + e);
+        }
+    }
+
+    f2()
 </script>
 </body>
 </html>
